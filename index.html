@@ -54,36 +54,19 @@
             width: 100%; background: transparent; border: none; color: #fff; font-size: 1.05rem; outline: none;
         }
 
-        /* Category Filter Pills with Visible Scrollbar */
+        /* Category Filter Pills */
         .categories-filter {
-            display: flex; 
-            overflow-x: auto; 
-            gap: 10px; 
-            padding: 12px 5px; 
-            margin-bottom: 25px; 
-            white-space: nowrap;
-            scrollbar-width: thin;
-            scrollbar-color: #d4af37 #1a1a1a;
+            display: flex; overflow-x: auto; gap: 10px; padding: 12px 5px; margin-bottom: 25px; 
+            white-space: nowrap; scrollbar-width: thin; scrollbar-color: #d4af37 #1a1a1a;
         }
-        .categories-filter::-webkit-scrollbar {
-            height: 8px;
-        }
-        .categories-filter::-webkit-scrollbar-track {
-            background: #1a1a1a;
-            border-radius: 10px;
-        }
-        .categories-filter::-webkit-scrollbar-thumb {
-            background: #d4af37;
-            border-radius: 10px;
-        }
-        .categories-filter::-webkit-scrollbar-thumb:hover {
-            background: #f3c642;
-        }
+        .categories-filter::-webkit-scrollbar { height: 8px; }
+        .categories-filter::-webkit-scrollbar-track { background: #1a1a1a; border-radius: 10px; }
+        .categories-filter::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+        .categories-filter::-webkit-scrollbar-thumb:hover { background: #f3c642; }
 
         .cat-btn {
             background: #1f1f1f; color: #ccc; border: 1px solid #333; padding: 8px 18px;
-            border-radius: 20px; font-size: 0.95rem; cursor: pointer; transition: 0.3s;
-            flex-shrink: 0;
+            border-radius: 20px; font-size: 0.95rem; cursor: pointer; transition: 0.3s; flex-shrink: 0;
         }
         .cat-btn:hover, .cat-btn.active { background: #d4af37; color: #121212; font-weight: 700; border-color: #d4af37; }
 
@@ -94,17 +77,19 @@
             display: flex; align-items: center; gap: 10px;
         }
         .items-grid { display: flex; flex-direction: column; gap: 12px; }
+        
+        /* Clean Professional Item Card (No Images, Full Width Text) */
         .menu-item {
             display: flex; align-items: center; background: #1a1a1a; border-radius: 12px;
             overflow: hidden; border: 1px solid #282828; transition: 0.3s;
         }
-        .menu-item:hover { border-color: #d4af37; transform: scale(1.01); }
-        .menu-item img { width: 90px; height: 90px; object-fit: cover; }
-        .item-details { padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .item-details h4 { font-size: 1.05rem; font-weight: 600; color: #fff; }
+        .menu-item:hover { border-color: #d4af37; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1); }
+        
+        .item-details { padding: 16px 22px; display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .item-details h4 { font-size: 1.15rem; font-weight: 600; color: #fff; }
         .price {
-            color: #d4af37; font-weight: 700; font-size: 1.05rem; background: rgba(212, 175, 55, 0.1);
-            padding: 6px 14px; border-radius: 8px; white-space: nowrap;
+            color: #d4af37; font-weight: 700; font-size: 1.1rem; background: rgba(212, 175, 55, 0.1);
+            padding: 8px 16px; border-radius: 8px; white-space: nowrap;
         }
 
         /* Notice Footer */
@@ -119,7 +104,7 @@
             <div class="logo-badge"><i class="fa-solid fa-moon"></i></div>
             <h1>كافيه ومطعم سهرة</h1>
             <div class="badge-247"><i class="fa-solid fa-clock"></i> مفتوح 24 ساعة - طوال أيام الأسبوع 🌙</div>
-            <p class="slogan">أجواء فخمة وسهرات مميزة، تجهيز كامل للحفلات والمناسبات الخاصة، شيشة فاخرة، وأشهى المأكولات والمشروبات!</p>
+            <p class="slogan">أجواء فخمة وسهرات مميزة، تجهيز كامل للحفلات والمناسبات الخاصة، أشهى المأكولات والمشروبات، وألذ أنواع الشيشة الفاخرة!</p>
             
             <div class="hero-buttons">
                 <a href="#menu-area" class="btn primary-btn"><i class="fa-solid fa-utensils"></i> تصفح المنيو الآن</a>
@@ -134,12 +119,21 @@
         <!-- Search Bar -->
         <div class="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="ابحث عن مشروبك أو أكلتك المفضلة (شاي، قهوة، بيتزا، شيشة، سموزي...)..." onkeyup="filterMenu()">
+            <input type="text" id="searchInput" placeholder="ابحث عن أكلتك أو طلبك المفضلة..." onkeyup="filterMenu()">
         </div>
 
-        <!-- Categories Filter Pills -->
+        <!-- Categories Filter Pills (Food First, Then Drinks & Shisha) -->
         <div class="categories-filter">
             <button class="cat-btn active" onclick="filterCategory('all', event)">الكل</button>
+            <button class="cat-btn" onclick="filterCategory('breakfast', event)">فطار شرقي</button>
+            <button class="cat-btn" onclick="filterCategory('manakish', event)">المناقيش</button>
+            <button class="cat-btn" onclick="filterCategory('pies', event)">فطائر</button>
+            <button class="cat-btn" onclick="filterCategory('pizza', event)">البيتزا</button>
+            <button class="cat-btn" onclick="filterCategory('pasta', event)">المكرونات</button>
+            <button class="cat-btn" onclick="filterCategory('mains', event)">أطباق رئيسية</button>
+            <button class="cat-btn" onclick="filterCategory('sandwiches', event)">ساندوتشات</button>
+            <button class="cat-btn" onclick="filterCategory('appetizers', event)">مقبلات ومقرمشات</button>
+            <button class="cat-btn" onclick="filterCategory('salads', event)">سلطات وشوربة</button>
             <button class="cat-btn" onclick="filterCategory('hot', event)">مشروبات ساخنة</button>
             <button class="cat-btn" onclick="filterCategory('coffee', event)">القهوة</button>
             <button class="cat-btn" onclick="filterCategory('juices', event)">عصائر وغازيات</button>
@@ -148,247 +142,299 @@
             <button class="cat-btn" onclick="filterCategory('smoothie', event)">السموزي</button>
             <button class="cat-btn" onclick="filterCategory('cocktail', event)">كوكتيلات ثلجية</button>
             <button class="cat-btn" onclick="filterCategory('shisha', event)">الشيشة</button>
-            <button class="cat-btn" onclick="filterCategory('mains', event)">أطباق رئيسية</button>
-            <button class="cat-btn" onclick="filterCategory('pizza', event)">البيتزا</button>
-            <button class="cat-btn" onclick="filterCategory('pasta', event)">المكرونات</button>
-            <button class="cat-btn" onclick="filterCategory('sandwiches', event)">ساندوتشات</button>
-            <button class="cat-btn" onclick="filterCategory('appetizers', event)">مقبلات</button>
-            <button class="cat-btn" onclick="filterCategory('dessert', event)">الحلويات</button>
-            <button class="cat-btn" onclick="filterCategory('salads', event)">سلطات وشوربة</button>
         </div>
 
         <!-- Menu Categories Container -->
         <div id="menuContainer">
 
-            <!-- 1. Hot Drinks -->
-            <div class="menu-section" data-category="hot">
-                <h3><i class="fa-solid fa-mug-hot"></i> مشروبات ساخنة</h3>
+            <!-- 1. Eastern Breakfast -->
+            <div class="menu-section" data-category="breakfast">
+                <h3><i class="fa-solid fa-egg"></i> فطار شرقي</h3>
                 <div class="items-grid">
-                    <div class="menu-item" data-name="شاي أحمر"><img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400"><div class="item-details"><h4>شاي أحمر</h4><span class="price">60 ج.م</span></div></div>
-                    <div class="menu-item" data-name="شاي أخضر"><img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400"><div class="item-details"><h4>شاي أخضر</h4><span class="price">60 ج.م</span></div></div>
-                    <div class="menu-item" data-name="يانسون"><img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=400"><div class="item-details"><h4>يانسون</h4><span class="price">60 ج.م</span></div></div>
-                    <div class="menu-item" data-name="نعناع"><img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400"><div class="item-details"><h4>نعناع</h4><span class="price">60 ج.م</span></div></div>
-                    <div class="menu-item" data-name="كركديه"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400"><div class="item-details"><h4>كركديه</h4><span class="price">60 ج.م</span></div></div>
-                    <div class="menu-item" data-name="قرفة"><img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=400"><div class="item-details"><h4>قرفة</h4><span class="price">80 ج.م</span></div></div>
-                    <div class="menu-item" data-name="جنزبيل"><img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=400"><div class="item-details"><h4>جنزبيل</h4><span class="price">80 ج.م</span></div></div>
-                    <div class="menu-item" data-name="شاي بالحليب"><img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400"><div class="item-details"><h4>شاي بالحليب</h4><span class="price">80 ج.م</span></div></div>
-                    <div class="menu-item" data-name="نسكافيه"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400"><div class="item-details"><h4>نسكافيه</h4><span class="price">140 ج.م</span></div></div>
-                    <div class="menu-item" data-name="قرفة بالجنزبيل"><img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=400"><div class="item-details"><h4>قرفة بالجنزبيل</h4><span class="price">90 ج.م</span></div></div>
-                    <div class="menu-item" data-name="كوكتيل أعشاب"><img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400"><div class="item-details"><h4>كوكتيل أعشاب</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="هوت سدر"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=400"><div class="item-details"><h4>هوت سدر</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="هوت شوكليت"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=400"><div class="item-details"><h4>هوت شوكليت</h4><span class="price">140 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سحلب"><img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400"><div class="item-details"><h4>سحلب عادي</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سحلب مكسرات"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400"><div class="item-details"><h4>سحلب مكسرات</h4><span class="price">140 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سحلب فواكه"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400"><div class="item-details"><h4>سحلب فواكه</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="فول"><div class="item-details"><h4>فول</h4><span class="price">60 ج.م</span></div></div>
+                    <div class="menu-item" data-name="طعميه"><div class="item-details"><h4>طعميه</h4><span class="price">40 ج.م</span></div></div>
+                    <div class="menu-item" data-name="جبنة بالطماطم"><div class="item-details"><h4>جبنة بالطماطم</h4><span class="price">60 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ميكس جبن"><div class="item-details"><h4>ميكس جبن</h4><span class="price">110 ج.م</span></div></div>
+                    <div class="menu-item" data-name="اومليت"><div class="item-details"><h4>اومليت</h4><span class="price">60 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كوفير عيش"><div class="item-details"><h4>كوفير عيش</h4><span class="price">40 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سلطة ميكس"><div class="item-details"><h4>سلطة ميكس</h4><span class="price">90 ج.م</span></div></div>
+                    <div class="menu-item" data-name="قشطة وعسل"><div class="item-details"><h4>قشطة وعسل</h4><span class="price">110 ج.م</span></div></div>
+                    <div class="menu-item" data-name="فطير شرقي"><div class="item-details"><h4>فطير شرقي</h4><span class="price">80 ج.م</span></div></div>
                 </div>
             </div>
 
-            <!-- 2. Coffee -->
-            <div class="menu-section" data-category="coffee">
-                <h3><i class="fa-solid fa-mug-saucer"></i> القهوة والقهوة المثلجة</h3>
+            <!-- 2. Manakish -->
+            <div class="menu-section" data-category="manakish">
+                <h3><i class="fa-solid fa-bread-slice"></i> المناقيش</h3>
                 <div class="items-grid">
-                    <div class="menu-item" data-name="إسبرسو سنجل"><img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400"><div class="item-details"><h4>إسبرسو سنجل</h4><span class="price">110 ج.م</span></div></div>
-                    <div class="menu-item" data-name="إسبرسو دبل"><img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400"><div class="item-details"><h4>إسبرسو دبل</h4><span class="price">130 ج.م</span></div></div>
-                    <div class="menu-item" data-name="كابتشينو"><img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400"><div class="item-details"><h4>كابتشينو</h4><span class="price">160 ج.م</span></div></div>
-                    <div class="menu-item" data-name="لاتيه"><img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400"><div class="item-details"><h4>لاتيه</h4><span class="price">160 ج.م</span></div></div>
-                    <div class="menu-item" data-name="موكا"><img src="https://images.unsplash.com/photo-1578314675249-a6979f88cc87?w=400"><div class="item-details"><h4>موكا</h4><span class="price">190 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ميكاتو سنجل"><img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=400"><div class="item-details"><h4>ميكاتو سنجل</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ميكاتو دبل"><img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=400"><div class="item-details"><h4>ميكاتو دبل</h4><span class="price">140 ج.م</span></div></div>
-                    <div class="menu-item" data-name="فلات وايت"><img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400"><div class="item-details"><h4>فلات وايت</h4><span class="price">190 ج.م</span></div></div>
-                    <div class="menu-item" data-name="كورتادو"><img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400"><div class="item-details"><h4>كورتادو</h4><span class="price">190 ج.م</span></div></div>
-                    <div class="menu-item" data-name="قهوة تركي سنجل"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400"><div class="item-details"><h4>قهوة تركي سنجل</h4><span class="price">90 ج.م</span></div></div>
-                    <div class="menu-item" data-name="قهوة تركي دبل"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400"><div class="item-details"><h4>قهوة تركي دبل</h4><span class="price">110 ج.م</span></div></div>
-                    <div class="menu-item" data-name="قهوة فرنساوي سنجل"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400"><div class="item-details"><h4>قهوة فرنساوي سنجل</h4><span class="price">140 ج.م</span></div></div>
-                    <div class="menu-item" data-name="قهوة بندق سنجل"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400"><div class="item-details"><h4>قهوة بندق سنجل</h4><span class="price">160 ج.م</span></div></div>
-                    <div class="menu-item" data-name="أمريكان كوفي"><img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400"><div class="item-details"><h4>أمريكان كوفي</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="أيس لاتيه"><img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400"><div class="item-details"><h4>أيس لاتيه</h4><span class="price">150 ج.م</span></div></div>
-                    <div class="menu-item" data-name="أيس موكا"><img src="https://images.unsplash.com/photo-1578314675249-a6979f88cc87?w=400"><div class="item-details"><h4>أيس موكا</h4><span class="price">170 ج.م</span></div></div>
-                    <div class="menu-item" data-name="أيس سبانيش"><img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400"><div class="item-details"><h4>أيس سبانيش</h4><span class="price">190 ج.م</span></div></div>
+                    <div class="menu-item" data-name="منقوشه زعتر"><div class="item-details"><h4>منقوشه زعتر</h4><span class="price">160 ج.م</span></div></div>
+                    <div class="menu-item" data-name="منقوشه لبنة"><div class="item-details"><h4>منقوشه لبنة</h4><span class="price">260 ج.م</span></div></div>
+                    <div class="menu-item" data-name="منقوشه لحمة موتزاريلا"><div class="item-details"><h4>منقوشه لحمة موتزاريلا</h4><span class="price">220 ج.م</span></div></div>
+                    <div class="menu-item" data-name="منقوشه ميكس جبن"><div class="item-details"><h4>منقوشه ميكس جبن</h4><span class="price">260 ج.م</span></div></div>
                 </div>
             </div>
 
-            <!-- 3. Juices & Sodas -->
-            <div class="menu-section" data-category="juices">
-                <h3><i class="fa-solid fa-glass-water"></i> العصائر الفريش والمشروبات الغازية</h3>
+            <!-- 3. Pies -->
+            <div class="menu-section" data-category="pies">
+                <h3><i class="fa-solid fa-pie-chart"></i> فطائر</h3>
                 <div class="items-grid">
-                    <div class="menu-item" data-name="عصير مانجو"><img src="https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=400"><div class="item-details"><h4>عصير مانجو</h4><span class="price">130 ج.م</span></div></div>
-                    <div class="menu-item" data-name="عصير فراولة"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400"><div class="item-details"><h4>عصير فراولة</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="عصير جوافة"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400"><div class="item-details"><h4>عصير جوافة</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="عصير ليمون نعناع"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400"><div class="item-details"><h4>عصير ليمون نعناع</h4><span class="price">100 ج.م</span></div></div>
-                    <div class="menu-item" data-name="عصير برتقال"><img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400"><div class="item-details"><h4>عصير برتقال</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="عصير موز بالحليب"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400"><div class="item-details"><h4>عصير موز بالحليب</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="عصير بطيخ"><img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400"><div class="item-details"><h4>عصير بطيخ</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="عصير كيوي"><img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400"><div class="item-details"><h4>عصير كيوي</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="عصير رمان"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400"><div class="item-details"><h4>عصير رمان</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="أفوكادو بالعسل"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400"><div class="item-details"><h4>أفوكادو بالعسل</h4><span class="price">190 ج.م</span></div></div>
-                    <div class="menu-item" data-name="مياه معدنية صغيرة"><img src="https://images.unsplash.com/photo-1560023907-5f339617ea30?w=400"><div class="item-details"><h4>مياه معدنية صغيرة</h4><span class="price">60 ج.م</span></div></div>
-                    <div class="menu-item" data-name="مياه فوارة"><img src="https://images.unsplash.com/photo-1560023907-5f339617ea30?w=400"><div class="item-details"><h4>مياه فوارة</h4><span class="price">80 ج.م</span></div></div>
-                    <div class="menu-item" data-name="بيبسي سفن اب ميرندا"><img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400"><div class="item-details"><h4>بيبسي / سفن أب / ميرندا</h4><span class="price">90 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ريدبول"><img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400"><div class="item-details"><h4>ريدبول</h4><span class="price">170 ج.م</span></div></div>
-                    <div class="menu-item" data-name="تويست"><img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400"><div class="item-details"><h4>تويست</h4><span class="price">100 ج.م</span></div></div>
-                    <div class="menu-item" data-name="فيروز بيريل"><img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400"><div class="item-details"><h4>فيروز / بيريل</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="جبنة بيضاء بالزيتون"><div class="item-details"><h4>جبنة بيضاء بالزيتون</h4><span class="price">250 ج.م</span></div></div>
+                    <div class="menu-item" data-name="فطيرة كرسبي"><div class="item-details"><h4>فطيرة كرسبي</h4><span class="price">300 ج.م</span></div></div>
                 </div>
             </div>
 
-            <!-- 4. Milkshake (Updated Prices to 170 EGP) -->
-            <div class="menu-section" data-category="milkshake">
-                <h3><i class="fa-solid fa-whiskey-glass"></i> ميلك شيك</h3>
-                <div class="items-grid">
-                    <div class="menu-item" data-name="ميلك شيك فراولة"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"><div class="item-details"><h4>ميلك شيك فراولة</h4><span class="price">170 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ميلك شيك مانجو"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"><div class="item-details"><h4>ميلك شيك مانجو</h4><span class="price">170 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ميلك شيك فانيليا"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"><div class="item-details"><h4>ميلك شيك فانيليا</h4><span class="price">170 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ميلك شيك شوكليت"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"><div class="item-details"><h4>ميلك شيك شوكليت</h4><span class="price">170 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ميلك شيك أوريو"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"><div class="item-details"><h4>ميلك شيك أوريو</h4><span class="price">170 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ميلك شيك لوتس"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"><div class="item-details"><h4>ميلك شيك لوتس</h4><span class="price">170 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ميلك شيك نوتيلا"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"><div class="item-details"><h4>ميلك شيك نوتيلا</h4><span class="price">170 ج.م</span></div></div>
-                </div>
-            </div>
-
-            <!-- 5. Frappe & Yogurt -->
-            <div class="menu-section" data-category="frappe">
-                <h3><i class="fa-solid fa-ice-cream"></i> فرابيه وزبادي</h3>
-                <div class="items-grid">
-                    <div class="menu-item" data-name="فرابتشينو كلاسيك"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"><div class="item-details"><h4>فرابتشينو كلاسيك</h4><span class="price">220 ج.م</span></div></div>
-                    <div class="menu-item" data-name="كراميل فرابيه"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"><div class="item-details"><h4>كراميل فرابيه</h4><span class="price">220 ج.م</span></div></div>
-                    <div class="menu-item" data-name="موكا فرابيه"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"><div class="item-details"><h4>موكا فرابيه</h4><span class="price">240 ج.م</span></div></div>
-                    <div class="menu-item" data-name="زبادي عسل"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400"><div class="item-details"><h4>زبادي عسل</h4><span class="price">140 ج.م</span></div></div>
-                    <div class="menu-item" data-name="زبادي فرابيه"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400"><div class="item-details"><h4>زبادي فرابيه</h4><span class="price">170 ج.م</span></div></div>
-                </div>
-            </div>
-
-            <!-- 6. Smoothies -->
-            <div class="menu-section" data-category="smoothie">
-                <h3><i class="fa-solid fa-blender"></i> السموزي الفريش</h3>
-                <div class="items-grid">
-                    <div class="menu-item" data-name="سموزي بطيخ"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400"><div class="item-details"><h4>سموزي بطيخ</h4><span class="price">150 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سموزي فراولة"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400"><div class="item-details"><h4>سموزي فراولة</h4><span class="price">150 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سموزي ليمون"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400"><div class="item-details"><h4>سموزي ليمون</h4><span class="price">150 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سموزي ليمون نعناع"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400"><div class="item-details"><h4>سموزي ليمون نعناع</h4><span class="price">150 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سموزي مانجو"><img src="https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=400"><div class="item-details"><h4>سموزي مانجو</h4><span class="price">170 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سموزي بلو بيري"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400"><div class="item-details"><h4>سموزي بلو بيري</h4><span class="price">180 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سموزي بالشور باشن فروت"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400"><div class="item-details"><h4>سموزي بالشور (باشن فروت)</h4><span class="price">180 ج.م</span></div></div>
-                </div>
-            </div>
-
-            <!-- 7. Cocktails -->
-            <div class="menu-section" data-category="cocktail">
-                <h3><i class="fa-solid fa-martini-glass-citrus"></i> كوكتيلات مثلجة</h3>
-                <div class="items-grid">
-                    <div class="menu-item" data-name="كوكتيل سهرة"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>كوكتيل سهرة المميز</h4><span class="price">250 ج.م</span></div></div>
-                    <div class="menu-item" data-name="بينا كولادا"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>بينا كولادا</h4><span class="price">180 ج.م</span></div></div>
-                    <div class="menu-item" data-name="فرابيه كوكتيل"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>فرابيه</h4><span class="price">190 ج.م</span></div></div>
-                    <div class="menu-item" data-name="مي شايي"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>مي شايي</h4><span class="price">140 ج.م</span></div></div>
-                    <div class="menu-item" data-name="هيب بوب"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>هيب بوب</h4><span class="price">190 ج.م</span></div></div>
-                    <div class="menu-item" data-name="أيس تي"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>أيس تي</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="نيو إنرجي"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>نيو إنرجي</h4><span class="price">140 ج.م</span></div></div>
-                    <div class="menu-item" data-name="بينك ليدي"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>بينك ليدي</h4><span class="price">190 ج.م</span></div></div>
-                    <div class="menu-item" data-name="تروبيكانا"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>تروبيكانا</h4><span class="price">140 ج.م</span></div></div>
-                    <div class="menu-item" data-name="موخيتو"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>موخيتو</h4><span class="price">190 ج.م</span></div></div>
-                    <div class="menu-item" data-name="فيجا أفوكادو"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400"><div class="item-details"><h4>فيجا أفوكادو</h4><span class="price">220 ج.م</span></div></div>
-                </div>
-            </div>
-
-            <!-- 8. Shisha -->
-            <div class="menu-section" data-category="shisha">
-                <h3><i class="fa-solid fa-wind"></i> الشيشة الفاخرة</h3>
-                <div class="items-grid">
-                    <div class="menu-item" data-name="شيشة سلومو"><img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=400"><div class="item-details"><h4>شيشة سلومو</h4><span class="price">90 ج.م</span></div></div>
-                    <div class="menu-item" data-name="شيشة فاخر"><img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=400"><div class="item-details"><h4>شيشة فاخر</h4><span class="price">250 ج.م</span></div></div>
-                    <div class="menu-item" data-name="شيشة مكس"><img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=400"><div class="item-details"><h4>شيشة مكس</h4><span class="price">250 ج.م</span></div></div>
-                    <div class="menu-item" data-name="دي استي طبيعي"><img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=400"><div class="item-details"><h4>دي إستي طبيعي</h4><span class="price">250 ج.م</span></div></div>
-                </div>
-            </div>
-
-            <!-- 9. Main Dishes -->
-            <div class="menu-section" data-category="mains">
-                <h3><i class="fa-solid fa-utensils"></i> الأطباق الرئيسية</h3>
-                <div class="items-grid">
-                    <div class="menu-item" data-name="طبق شيش"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"><div class="item-details"><h4>طبق شيش</h4><span class="price">480 ج.م</span></div></div>
-                    <div class="menu-item" data-name="طبق بانية"><img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=400"><div class="item-details"><h4>طبق بانية</h4><span class="price">420 ج.م</span></div></div>
-                    <div class="menu-item" data-name="طبق كفتة"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400"><div class="item-details"><h4>طبق كفتة</h4><span class="price">490 ج.م</span></div></div>
-                    <div class="menu-item" data-name="فاهيتا فراخ طبق"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"><div class="item-details"><h4>فاهيتا فراخ</h4><span class="price">480 ج.م</span></div></div>
-                </div>
-            </div>
-
-            <!-- 10. Pizza -->
+            <!-- 4. Pizza -->
             <div class="menu-section" data-category="pizza">
                 <h3><i class="fa-solid fa-pizza-slice"></i> البيتزا</h3>
                 <div class="items-grid">
-                    <div class="menu-item" data-name="بيتزا مارجريتا"><img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=400"><div class="item-details"><h4>بيتزا مارجريتا</h4><span class="price">220 ج.م</span></div></div>
-                    <div class="menu-item" data-name="بيتزا كواترو فورماجي"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400"><div class="item-details"><h4>بيتزا كواترو فورماجي</h4><span class="price">260 ج.م</span></div></div>
-                    <div class="menu-item" data-name="بيتزا تشيكن باربيكيو"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400"><div class="item-details"><h4>بيتزا تشيكن باربيكيو</h4><span class="price">290 ج.م</span></div></div>
-                    <div class="menu-item" data-name="بيتزا تونة"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400"><div class="item-details"><h4>بيتزا تونة</h4><span class="price">280 ج.م</span></div></div>
-                    <div class="menu-item" data-name="بيتزا خضراوات"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400"><div class="item-details"><h4>بيتزا خضراوات</h4><span class="price">220 ج.م</span></div></div>
-                    <div class="menu-item" data-name="بيتزا بيببوني مكس لحوم"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400"><div class="item-details"><h4>بيتزا بيبروني / مكس لحوم</h4><span class="price">290 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بيتزا مارجريتا"><div class="item-details"><h4>بيتزا مارجريتا</h4><span class="price">220 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بيتزا كواترو فورماجي"><div class="item-details"><h4>بيتزا كواترو فورماجي</h4><span class="price">260 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بيتزا تشيكن باربيكيو"><div class="item-details"><h4>بيتزا تشيكن باربيكيو</h4><span class="price">290 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بيتزا تونة"><div class="item-details"><h4>بيتزا تونة</h4><span class="price">280 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بيتزا خضراوات"><div class="item-details"><h4>بيتزا خضراوات</h4><span class="price">220 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بيتزا بيبروني / مكس لحوم"><div class="item-details"><h4>بيتزا بيبروني / مكس لحوم</h4><span class="price">290 ج.م</span></div></div>
                 </div>
             </div>
 
-            <!-- 11. Pasta -->
+            <!-- 5. Pasta -->
             <div class="menu-section" data-category="pasta">
                 <h3><i class="fa-solid fa-bowl-food"></i> المكرونات</h3>
                 <div class="items-grid">
-                    <div class="menu-item" data-name="بستا ألفريدو"><img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281222?w=400"><div class="item-details"><h4>بستا ألفريدو</h4><span class="price">210 ج.م</span></div></div>
-                    <div class="menu-item" data-name="أربياتا"><img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400"><div class="item-details"><h4>أربياتا</h4><span class="price">180 ج.م</span></div></div>
-                    <div class="menu-item" data-name="نجرسكو"><img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=400"><div class="item-details"><h4>نجرسكو</h4><span class="price">230 ج.م</span></div></div>
-                    <div class="menu-item" data-name="اسباجتي بلونيز"><img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281222?w=400"><div class="item-details"><h4>اسباجتي بلونيز</h4><span class="price">210 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بستا ألفريدو"><div class="item-details"><h4>بستا ألفريدو</h4><span class="price">210 ج.م</span></div></div>
+                    <div class="menu-item" data-name="أربياتا"><div class="item-details"><h4>أربياتا</h4><span class="price">180 ج.م</span></div></div>
+                    <div class="menu-item" data-name="نجرسكو"><div class="item-details"><h4>نجرسكو</h4><span class="price">230 ج.م</span></div></div>
+                    <div class="menu-item" data-name="اسباجتي بلونيز"><div class="item-details"><h4>اسباجتي بلونيز</h4><span class="price">210 ج.م</span></div></div>
                 </div>
             </div>
 
-            <!-- 12. Sandwiches -->
+            <!-- 6. Main Dishes -->
+            <div class="menu-section" data-category="mains">
+                <h3><i class="fa-solid fa-utensils"></i> أطباق رئيسية</h3>
+                <div class="items-grid">
+                    <div class="menu-item" data-name="ميكس جريل"><div class="item-details"><h4>ميكس جريل</h4><span class="price">900 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كباب بتلو"><div class="item-details"><h4>كباب بتلو</h4><span class="price">570 ج.م</span></div></div>
+                    <div class="menu-item" data-name="مسحب"><div class="item-details"><h4>مسحب</h4><span class="price">470 ج.م</span></div></div>
+                    <div class="menu-item" data-name="تشيكن مشروم"><div class="item-details"><h4>تشيكن مشروم</h4><span class="price">430 ج.م</span></div></div>
+                    <div class="menu-item" data-name="تشيكن ليمون"><div class="item-details"><h4>تشيكن ليمون</h4><span class="price">430 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كوردن بلو"><div class="item-details"><h4>كوردن بلو</h4><span class="price">530 ج.م</span></div></div>
+                    <div class="menu-item" data-name="تشيكن بنزايولا"><div class="item-details"><h4>تشيكن بنزايولا</h4><span class="price">530 ج.م</span></div></div>
+                    <div class="menu-item" data-name="استيك"><div class="item-details"><h4>استيك</h4><span class="price">570 ج.م</span></div></div>
+                    <div class="menu-item" data-name="فاهيتا لحمه"><div class="item-details"><h4>فاهيتا لحمه</h4><span class="price">570 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بيف استرجانوف"><div class="item-details"><h4>بيف استرجانوف</h4><span class="price">530 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كبدة"><div class="item-details"><h4>كبدة</h4><span class="price">570 ج.م</span></div></div>
+                </div>
+            </div>
+
+            <!-- 7. Sandwiches -->
             <div class="menu-section" data-category="sandwiches">
                 <h3><i class="fa-solid fa-burger"></i> الساندوتشات</h3>
                 <div class="items-grid">
-                    <div class="menu-item" data-name="ساندوتش كفتة"><img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?w=400"><div class="item-details"><h4>ساندوتش كفتة</h4><span class="price">210 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ساندوتش شيش"><img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?w=400"><div class="item-details"><h4>ساندوتش شيش</h4><span class="price">220 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ساندوتش باسترمة"><img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?w=400"><div class="item-details"><h4>ساندوتش باسترمة</h4><span class="price">200 ج.م</span></div></div>
-                    <div class="menu-item" data-name="فاهيتا فراخ"><img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?w=400"><div class="item-details"><h4>فاهيتا فراخ</h4><span class="price">220 ج.م</span></div></div>
-                    <div class="menu-item" data-name="برجر"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400"><div class="item-details"><h4>ساندوتش برجر</h4><span class="price">250 ج.م</span></div></div>
+                    <div class="menu-item" data-name="فاهيتا لحمه"><div class="item-details"><h4>فاهيتا لحمه</h4><span class="price">260 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ساندوتش كرسبي"><div class="item-details"><h4>ساندوتش كرسبي</h4><span class="price">220 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كساديا فراخ"><div class="item-details"><h4>كساديا فراخ</h4><span class="price">270 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كبدة اسكندراني"><div class="item-details"><h4>كبدة اسكندراني</h4><span class="price">310 ج.م</span></div></div>
+                    <div class="menu-item" data-name="حواوشي"><div class="item-details"><h4>حواوشي</h4><span class="price">350 ج.م</span></div></div>
+                    <div class="menu-item" data-name="جمبري فرايد"><div class="item-details"><h4>جمبري فرايد</h4><span class="price">300 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ستيك اند تشيز"><div class="item-details"><h4>ستيك اند تشيز</h4><span class="price">370 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شاورما فراخ"><div class="item-details"><h4>شاورما فراخ</h4><span class="price">220 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ساندوتش كفتة"><div class="item-details"><h4>ساندوتش كفتة</h4><span class="price">210 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ساندوتش شيش"><div class="item-details"><h4>ساندوتش شيش</h4><span class="price">220 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ساندوتش باسترمة"><div class="item-details"><h4>ساندوتش باسترمة</h4><span class="price">200 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ساندوتش برجر"><div class="item-details"><h4>ساندوتش برجر</h4><span class="price">250 ج.م</span></div></div>
                 </div>
             </div>
 
-            <!-- 13. Appetizers -->
+            <!-- 8. Appetizers -->
             <div class="menu-section" data-category="appetizers">
-                <h3><i class="fa-solid fa-plate-wheat"></i> المقابلات الحارة والباردة</h3>
+                <h3><i class="fa-solid fa-plate-wheat"></i> المقبلات والمقرمشات</h3>
                 <div class="items-grid">
-                    <div class="menu-item" data-name="بطاطس حارة"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400"><div class="item-details"><h4>بطاطس حارة</h4><span class="price">85 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ثوم فريت"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400"><div class="item-details"><h4>ثوم فريت</h4><span class="price">75 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سمبوسك جبن"><img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400"><div class="item-details"><h4>سمبوسك جبن</h4><span class="price">125 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سمبوسك لحم"><img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400"><div class="item-details"><h4>سمبوسك لحم</h4><span class="price">135 ج.م</span></div></div>
-                    <div class="menu-item" data-name="حمص"><img src="https://images.unsplash.com/photo-1541518763669-27fef04b14da?w=400"><div class="item-details"><h4>حمص</h4><span class="price">70 ج.م</span></div></div>
-                    <div class="menu-item" data-name="حمص بلحم"><img src="https://images.unsplash.com/photo-1541518763669-27fef04b14da?w=400"><div class="item-details"><h4>حمص بلحم</h4><span class="price">130 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ورق عنب"><img src="https://images.unsplash.com/photo-1541518763669-27fef04b14da?w=400"><div class="item-details"><h4>ورق عنب</h4><span class="price">90 ج.م</span></div></div>
-                    <div class="menu-item" data-name="صينية بطاطس"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400"><div class="item-details"><h4>صينية بطاطس</h4><span class="price">70 ج.م</span></div></div>
-                    <div class="menu-item" data-name="مخلل"><img src="https://images.unsplash.com/photo-1541518763669-27fef04b14da?w=400"><div class="item-details"><h4>مخلل</h4><span class="price">50 ج.م</span></div></div>
+                    <div class="menu-item" data-name="اسبرنج رول"><div class="item-details"><h4>اسبرنج رول</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كرسبي مقبلات"><div class="item-details"><h4>كرسبي مقبلات</h4><span class="price">210 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كبدة دبس رمان"><div class="item-details"><h4>كبدة دبس رمان</h4><span class="price">210 ج.م</span></div></div>
+                    <div class="menu-item" data-name="فرايد موتزاريلا"><div class="item-details"><h4>فرايد موتزاريلا</h4><span class="price">130 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بطاطس حارة"><div class="item-details"><h4>بطاطس حارة</h4><span class="price">85 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ثوم فريت"><div class="item-details"><h4>ثوم فريت</h4><span class="price">75 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سمبوسك جبن"><div class="item-details"><h4>سمبوسك جبن</h4><span class="price">125 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سمبوسك لحم"><div class="item-details"><h4>سمبوسك لحم</h4><span class="price">135 ج.م</span></div></div>
+                    <div class="menu-item" data-name="حمص"><div class="item-details"><h4>حمص</h4><span class="price">70 ج.م</span></div></div>
+                    <div class="menu-item" data-name="حمص بلحم"><div class="item-details"><h4>حمص بلحم</h4><span class="price">130 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ورق عنب"><div class="item-details"><h4>ورق عنب</h4><span class="price">90 ج.م</span></div></div>
+                    <div class="menu-item" data-name="صينية بطاطس"><div class="item-details"><h4>صينية بطاطس</h4><span class="price">70 ج.م</span></div></div>
+                    <div class="menu-item" data-name="مخلل"><div class="item-details"><h4>مخلل</h4><span class="price">50 ج.م</span></div></div>
                 </div>
             </div>
 
-            <!-- 14. Dessert -->
-            <div class="menu-section" data-category="dessert">
-                <h3><i class="fa-solid fa-cake-candles"></i> الحلويات</h3>
-                <div class="items-grid">
-                    <div class="menu-item" data-name="طبق فاكهة كبير"><img src="https://images.unsplash.com/photo-1519869325930-281384150729?w=400"><div class="item-details"><h4>طبق فاكهة كبير</h4><span class="price">300 ج.م</span></div></div>
-                    <div class="menu-item" data-name="طبق فاكهة صغير"><img src="https://images.unsplash.com/photo-1519869325930-281384150729?w=400"><div class="item-details"><h4>طبق فاكهة صغير</h4><span class="price">200 ج.م</span></div></div>
-                    <div class="menu-item" data-name="طبق تسالي كبير"><img src="https://images.unsplash.com/photo-1519869325930-281384150729?w=400"><div class="item-details"><h4>طبق تسالي كبير</h4><span class="price">250 ج.م</span></div></div>
-                    <div class="menu-item" data-name="طبق تسالي صغير"><img src="https://images.unsplash.com/photo-1519869325930-281384150729?w=400"><div class="item-details"><h4>طبق تسالي صغير</h4><span class="price">170 ج.م</span></div></div>
-                    <div class="menu-item" data-name="تشيز كيك"><img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400"><div class="item-details"><h4>تشيز كيك (فراولة / بلو بيري / مكس بيري)</h4><span class="price">220 ج.م</span></div></div>
-                    <div class="menu-item" data-name="مولتن كيك"><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400"><div class="item-details"><h4>مولتن كيك</h4><span class="price">250 ج.م</span></div></div>
-                    <div class="menu-item" data-name="شوكليت كيك"><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400"><div class="item-details"><h4>شوكليت كيك</h4><span class="price">220 ج.م</span></div></div>
-                    <div class="menu-item" data-name="براونيز"><img src="https://images.unsplash.com/photo-1514517521153-1be72277b32f?w=400"><div class="item-details"><h4>براونيز</h4><span class="price">220 ج.م</span></div></div>
-                </div>
-            </div>
-
-            <!-- 15. Salads & Soups -->
+            <!-- 9. Salads & Soups -->
             <div class="menu-section" data-category="salads">
                 <h3><i class="fa-solid fa-leaf"></i> السلطات والشوربة</h3>
                 <div class="items-grid">
-                    <div class="menu-item" data-name="طحينة"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400"><div class="item-details"><h4>طحينة</h4><span class="price">60 ج.م</span></div></div>
-                    <div class="menu-item" data-name="سلطة بلدي"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400"><div class="item-details"><h4>سلطة بلدي</h4><span class="price">80 ج.م</span></div></div>
-                    <div class="menu-item" data-name="ثومية"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400"><div class="item-details"><h4>ثومية</h4><span class="price">70 ج.م</span></div></div>
-                    <div class="menu-item" data-name="كول سلو"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400"><div class="item-details"><h4>كول سلو</h4><span class="price">70 ج.م</span></div></div>
-                    <div class="menu-item" data-name="تشيكن سيزار"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400"><div class="item-details"><h4>تشيكن سيزار</h4><span class="price">150 ج.م</span></div></div>
-                    <div class="menu-item" data-name="شوربة فراخ بالكريمة مشروم"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"><div class="item-details"><h4>شوربة فراخ بالكريمة أو المشروم</h4><span class="price">180 ج.م</span></div></div>
-                    <div class="menu-item" data-name="شوربة لسان عصفور"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"><div class="item-details"><h4>شوربة لسان عصفور</h4><span class="price">120 ج.م</span></div></div>
-                    <div class="menu-item" data-name="شوربة خضار"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400"><div class="item-details"><h4>شوربة خضار</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شوربة سي فود"><div class="item-details"><h4>شوربة سي فود</h4><span class="price">200 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سلطة جريك"><div class="item-details"><h4>سلطة جريك</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بابا غنوج"><div class="item-details"><h4>بابا غنوج</h4><span class="price">70 ج.م</span></div></div>
+                    <div class="menu-item" data-name="طحينة"><div class="item-details"><h4>طحينة</h4><span class="price">60 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سلطة بلدي"><div class="item-details"><h4>سلطة بلدي</h4><span class="price">80 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ثومية"><div class="item-details"><h4>ثومية</h4><span class="price">70 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كول سلو"><div class="item-details"><h4>كول سلو</h4><span class="price">70 ج.م</span></div></div>
+                    <div class="menu-item" data-name="تشيكن سيزار"><div class="item-details"><h4>تشيكن سيزار</h4><span class="price">150 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شوربة فراخ بالكريمة أو المشروم"><div class="item-details"><h4>شوربة فراخ بالكريمة أو المشروم</h4><span class="price">180 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شوربة لسان عصفور"><div class="item-details"><h4>شوربة لسان عصفور</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شوربة خضار"><div class="item-details"><h4>شوربة خضار</h4><span class="price">120 ج.م</span></div></div>
+                </div>
+            </div>
+
+            <!-- 10. Hot Drinks -->
+            <div class="menu-section" data-category="hot">
+                <h3><i class="fa-solid fa-mug-hot"></i> مشروبات ساخنة</h3>
+                <div class="items-grid">
+                    <div class="menu-item" data-name="شاي أحمر"><div class="item-details"><h4>شاي أحمر</h4><span class="price">60 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شاي أخضر"><div class="item-details"><h4>شاي أخضر</h4><span class="price">60 ج.م</span></div></div>
+                    <div class="menu-item" data-name="يانسون"><div class="item-details"><h4>يانسون</h4><span class="price">60 ج.م</span></div></div>
+                    <div class="menu-item" data-name="نعناع"><div class="item-details"><h4>نعناع</h4><span class="price">60 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كركديه"><div class="item-details"><h4>كركديه</h4><span class="price">60 ج.م</span></div></div>
+                    <div class="menu-item" data-name="قرفة"><div class="item-details"><h4>قرفة</h4><span class="price">80 ج.م</span></div></div>
+                    <div class="menu-item" data-name="جنزبيل"><div class="item-details"><h4>جنزبيل</h4><span class="price">80 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شاي بالحليب"><div class="item-details"><h4>شاي بالحليب</h4><span class="price">80 ج.م</span></div></div>
+                    <div class="menu-item" data-name="نسكافيه"><div class="item-details"><h4>نسكافيه</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="قرفة بالجنزبيل"><div class="item-details"><h4>قرفة بالجنزبيل</h4><span class="price">90 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كوكتيل أعشاب"><div class="item-details"><h4>كوكتيل أعشاب</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="هوت سدر"><div class="item-details"><h4>هوت سدر</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="هوت شوكليت"><div class="item-details"><h4>هوت شوكليت</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سحلب عادي"><div class="item-details"><h4>سحلب عادي</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سحلب مكسرات"><div class="item-details"><h4>سحلب مكسرات</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سحلب فواكه"><div class="item-details"><h4>سحلب فواكه</h4><span class="price">140 ج.م</span></div></div>
+                </div>
+            </div>
+
+            <!-- 11. Coffee (French & Hazelnut updated to Double) -->
+            <div class="menu-section" data-category="coffee">
+                <h3><i class="fa-solid fa-mug-saucer"></i> القهوة والقهوة المثلجة</h3>
+                <div class="items-grid">
+                    <div class="menu-item" data-name="إسبرسو سنجل"><div class="item-details"><h4>إسبرسو سنجل</h4><span class="price">110 ج.م</span></div></div>
+                    <div class="menu-item" data-name="إسبرسو دبل"><div class="item-details"><h4>إسبرسو دبل</h4><span class="price">130 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كابتشينو"><div class="item-details"><h4>كابتشينو</h4><span class="price">160 ج.م</span></div></div>
+                    <div class="menu-item" data-name="لاتيه"><div class="item-details"><h4>لاتيه</h4><span class="price">160 ج.م</span></div></div>
+                    <div class="menu-item" data-name="موكا"><div class="item-details"><h4>موكا</h4><span class="price">190 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ميكاتو سنجل"><div class="item-details"><h4>ميكاتو سنجل</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ميكاتو دبل"><div class="item-details"><h4>ميكاتو دبل</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="فلات وايت"><div class="item-details"><h4>فلات وايت</h4><span class="price">190 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كورتادو"><div class="item-details"><h4>كورتادو</h4><span class="price">190 ج.م</span></div></div>
+                    <div class="menu-item" data-name="قهوة تركي سنجل"><div class="item-details"><h4>قهوة تركي سنجل</h4><span class="price">90 ج.م</span></div></div>
+                    <div class="menu-item" data-name="قهوة تركي دبل"><div class="item-details"><h4>قهوة تركي دبل</h4><span class="price">110 ج.م</span></div></div>
+                    <div class="menu-item" data-name="قهوة فرنساوي دبل"><div class="item-details"><h4>قهوة فرنساوي دبل</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="قهوة بندق دبل"><div class="item-details"><h4>قهوة بندق دبل</h4><span class="price">160 ج.م</span></div></div>
+                    <div class="menu-item" data-name="أمريكان كوفي"><div class="item-details"><h4>أمريكان كوفي</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="أيس لاتيه"><div class="item-details"><h4>أيس لاتيه</h4><span class="price">150 ج.م</span></div></div>
+                    <div class="menu-item" data-name="أيس موكا"><div class="item-details"><h4>أيس موكا</h4><span class="price">170 ج.م</span></div></div>
+                    <div class="menu-item" data-name="أيس سبانيش"><div class="item-details"><h4>أيس سبانيش</h4><span class="price">190 ج.م</span></div></div>
+                </div>
+            </div>
+
+            <!-- 12. Juices & Sodas -->
+            <div class="menu-section" data-category="juices">
+                <h3><i class="fa-solid fa-glass-water"></i> العصائر الفريش والمشروبات الغازية</h3>
+                <div class="items-grid">
+                    <div class="menu-item" data-name="عصير مانجو"><div class="item-details"><h4>عصير مانجو</h4><span class="price">130 ج.م</span></div></div>
+                    <div class="menu-item" data-name="عصير فراولة"><div class="item-details"><h4>عصير فراولة</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="عصير جوافة"><div class="item-details"><h4>عصير جوافة</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="عصير ليمون نعناع"><div class="item-details"><h4>عصير ليمون نعناع</h4><span class="price">100 ج.م</span></div></div>
+                    <div class="menu-item" data-name="عصير برتقال"><div class="item-details"><h4>عصير برتقال</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="عصير موز بالحليب"><div class="item-details"><h4>عصير موز بالحليب</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="عصير بطيخ"><div class="item-details"><h4>عصير بطيخ</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="عصير كيوي"><div class="item-details"><h4>عصير كيوي</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="عصير رمان"><div class="item-details"><h4>عصير رمان</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="أفوكادو بالعسل"><div class="item-details"><h4>أفوكادو بالعسل</h4><span class="price">190 ج.م</span></div></div>
+                    <div class="menu-item" data-name="مياه معدنية صغيرة"><div class="item-details"><h4>مياه معدنية صغيرة</h4><span class="price">60 ج.م</span></div></div>
+                    <div class="menu-item" data-name="مياه فوارة"><div class="item-details"><h4>مياه فوارة</h4><span class="price">80 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بيبسي سفن اب ميرندا"><div class="item-details"><h4>بيبسي / سفن أب / ميرندا</h4><span class="price">90 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ريدبول"><div class="item-details"><h4>ريدبول</h4><span class="price">170 ج.م</span></div></div>
+                    <div class="menu-item" data-name="تويست"><div class="item-details"><h4>تويست</h4><span class="price">100 ج.م</span></div></div>
+                    <div class="menu-item" data-name="فيروز بيريل"><div class="item-details"><h4>فيروز / بيريل</h4><span class="price">120 ج.م</span></div></div>
+                </div>
+            </div>
+
+            <!-- 13. Milkshake -->
+            <div class="menu-section" data-category="milkshake">
+                <h3><i class="fa-solid fa-whiskey-glass"></i> ميلك شيك</h3>
+                <div class="items-grid">
+                    <div class="menu-item" data-name="ميلك شيك فراولة"><div class="item-details"><h4>ميلك شيك فراولة</h4><span class="price">170 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ميلك شيك مانجو"><div class="item-details"><h4>ميلك شيك مانجو</h4><span class="price">170 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ميلك شيك فانيليا"><div class="item-details"><h4>ميلك شيك فانيليا</h4><span class="price">170 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ميلك شيك شوكليت"><div class="item-details"><h4>ميلك شيك شوكليت</h4><span class="price">170 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ميلك شيك أوريو"><div class="item-details"><h4>ميلك شيك أوريو</h4><span class="price">170 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ميلك شيك لوتس"><div class="item-details"><h4>ميلك شيك لوتس</h4><span class="price">170 ج.م</span></div></div>
+                    <div class="menu-item" data-name="ميلك شيك نوتيلا"><div class="item-details"><h4>ميلك شيك نوتيلا</h4><span class="price">170 ج.م</span></div></div>
+                </div>
+            </div>
+
+            <!-- 14. Frappe & Yogurt -->
+            <div class="menu-section" data-category="frappe">
+                <h3><i class="fa-solid fa-ice-cream"></i> فرابيه وزبادي</h3>
+                <div class="items-grid">
+                    <div class="menu-item" data-name="فرابتشينو كلاسيك"><div class="item-details"><h4>فرابتشينو كلاسيك</h4><span class="price">220 ج.م</span></div></div>
+                    <div class="menu-item" data-name="كراميل فرابيه"><div class="item-details"><h4>كراميل فرابيه</h4><span class="price">220 ج.م</span></div></div>
+                    <div class="menu-item" data-name="موكا فرابيه"><div class="item-details"><h4>موكا فرابيه</h4><span class="price">240 ج.م</span></div></div>
+                    <div class="menu-item" data-name="زبادي عسل"><div class="item-details"><h4>زبادي عسل</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="زبادي فرابيه"><div class="item-details"><h4>زبادي فرابيه</h4><span class="price">170 ج.م</span></div></div>
+                </div>
+            </div>
+
+            <!-- 15. Smoothies -->
+            <div class="menu-section" data-category="smoothie">
+                <h3><i class="fa-solid fa-blender"></i> السموزي الفريش</h3>
+                <div class="items-grid">
+                    <div class="menu-item" data-name="سموزي بطيخ"><div class="item-details"><h4>سموزي بطيخ</h4><span class="price">150 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سموزي فراولة"><div class="item-details"><h4>سموزي فراولة</h4><span class="price">150 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سموزي ليمون"><div class="item-details"><h4>سموزي ليمون</h4><span class="price">150 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سموزي ليمون نعناع"><div class="item-details"><h4>سموزي ليمون نعناع</h4><span class="price">150 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سموزي مانجو"><div class="item-details"><h4>سموزي مانجو</h4><span class="price">170 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سموزي بلو بيري"><div class="item-details"><h4>سموزي بلو بيري</h4><span class="price">180 ج.م</span></div></div>
+                    <div class="menu-item" data-name="سموزي بالشور باشن فروت"><div class="item-details"><h4>سموزي بالشور (باشن فروت)</h4><span class="price">180 ج.م</span></div></div>
+                </div>
+            </div>
+
+            <!-- 16. Cocktails -->
+            <div class="menu-section" data-category="cocktail">
+                <h3><i class="fa-solid fa-martini-glass-citrus"></i> كوكتيلات مثلجة</h3>
+                <div class="items-grid">
+                    <div class="menu-item" data-name="كوكتيل سهرة"><div class="item-details"><h4>كوكتيل سهرة المميز</h4><span class="price">250 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بينا كولادا"><div class="item-details"><h4>بينا كولادا</h4><span class="price">180 ج.م</span></div></div>
+                    <div class="menu-item" data-name="فرابيه كوكتيل"><div class="item-details"><h4>فرابيه</h4><span class="price">190 ج.م</span></div></div>
+                    <div class="menu-item" data-name="مي شايي"><div class="item-details"><h4>مي شايي</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="هيب بوب"><div class="item-details"><h4>هيب بوب</h4><span class="price">190 ج.م</span></div></div>
+                    <div class="menu-item" data-name="أيس تي"><div class="item-details"><h4>أيس تي</h4><span class="price">120 ج.م</span></div></div>
+                    <div class="menu-item" data-name="نيو إنرجي"><div class="item-details"><h4>نيو إنرجي</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="بينك ليدي"><div class="item-details"><h4>بينك ليدي</h4><span class="price">190 ج.م</span></div></div>
+                    <div class="menu-item" data-name="تروبيكانا"><div class="item-details"><h4>تروبيكانا</h4><span class="price">140 ج.م</span></div></div>
+                    <div class="menu-item" data-name="موخيتو"><div class="item-details"><h4>موخيتو</h4><span class="price">190 ج.م</span></div></div>
+                    <div class="menu-item" data-name="فيجا أفوكادو"><div class="item-details"><h4>فيجا أفوكادو</h4><span class="price">220 ج.م</span></div></div>
+                </div>
+            </div>
+
+            <!-- 17. Dessert -->
+            <div class="menu-section" data-category="dessert">
+                <h3><i class="fa-solid fa-cake-candles"></i> الحلويات</h3>
+                <div class="items-grid">
+                    <div class="menu-item" data-name="طبق فاكهة كبير"><div class="item-details"><h4>طبق فاكهة كبير</h4><span class="price">300 ج.م</span></div></div>
+                    <div class="menu-item" data-name="طبق فاكهة صغير"><div class="item-details"><h4>طبق فاكهة صغير</h4><span class="price">200 ج.م</span></div></div>
+                    <div class="menu-item" data-name="طبق تسالي كبير"><div class="item-details"><h4>طبق تسالي كبير</h4><span class="price">250 ج.م</span></div></div>
+                    <div class="menu-item" data-name="طبق تسالي صغير"><div class="item-details"><h4>طبق تسالي صغير</h4><span class="price">170 ج.م</span></div></div>
+                    <div class="menu-item" data-name="تشيز كيك"><div class="item-details"><h4>تشيز كيك (فراولة / بلو بيري / مكس بيري)</h4><span class="price">220 ج.م</span></div></div>
+                    <div class="menu-item" data-name="مولتن كيك"><div class="item-details"><h4>مولتن كيك</h4><span class="price">250 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شوكليت كيك"><div class="item-details"><h4>شوكليت كيك</h4><span class="price">220 ج.م</span></div></div>
+                    <div class="menu-item" data-name="براونيز"><div class="item-details"><h4>براونيز</h4><span class="price">220 ج.م</span></div></div>
+                </div>
+            </div>
+
+            <!-- 18. Shisha -->
+            <div class="menu-section" data-category="shisha">
+                <h3><i class="fa-solid fa-wind"></i> الشيشة الفاخرة</h3>
+                <div class="items-grid">
+                    <div class="menu-item" data-name="شيشة قص"><div class="item-details"><h4>شيشة قص / تفاحتين</h4><span class="price">90 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شيشة سلومو"><div class="item-details"><h4>شيشة سلومو</h4><span class="price">90 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شيشة نكهات"><div class="item-details"><h4>شيشة نكهات مميزة (عنب، نعناع، ليمون)</h4><span class="price">100 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شيشة فاخر"><div class="item-details"><h4>شيشة فاخر</h4><span class="price">250 ج.م</span></div></div>
+                    <div class="menu-item" data-name="شيشة مكس"><div class="item-details"><h4>شيشة مكس</h4><span class="price">250 ج.م</span></div></div>
+                    <div class="menu-item" data-name="دي استي طبيعي"><div class="item-details"><h4>دي إستي طبيعي</h4><span class="price">250 ج.م</span></div></div>
                 </div>
             </div>
 
@@ -396,7 +442,7 @@
 
         <!-- Footer Notice -->
         <div class="footer-notice">
-            <p>🌟 كافيه ومطعم سهرة - متاحون على مدار 24 ساعة للحفلات والمناسبات والأجواء المميزة.</p>
+            <p>🌟 كافيه ومطعم سهرة - متاحون على مدار 24 ساعة للحفلات والمناسبات والأجواء المميزة وشيشة فاخرة.</p>
             <p>* الأسعار لا تشمل الضريبة (14%) والخدمة (12%)</p>
         </div>
 
